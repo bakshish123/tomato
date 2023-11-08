@@ -50,4 +50,48 @@ export const signInUser = asyncHandler(async (req, res) => {
   }
 });
 
+export const getUser = asyncHandler(async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      res.status(404);
+      throw new Error("User not found");
+    }
+    const { password, ...rest } = user._doc;
+    res.status(200).json(rest);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+export const updateUser = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const { name, email, password } = req.body;
+  if (id === req.user._id.toString()) {
+    if (password) {
+      const hashedPassword = bcrypt.hashSync(password, 10);
+      req.body.password = hashedPassword;
+    }
+    const user = await User.findByIdAndUpdate(id, req.body, { new: true });
+    const { password: pass, ...rest } = user._doc;
+    res.status(200).json(rest);
+  } else {
+    res.status(401);
+    throw new Error("You can only edit your account");
+  }
+});
+
+export const deleteUser = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  if (id === req.user._id.toString()) {
+    await User.findByIdAndDelete(id);
+    res.status(200).json("User has been deleted");
+  } else {
+    res.status(401);
+    throw new Error("You can only delete your account");
+  }
+});
+
+
+//added some changes
 // Path: tomato/backend/utils/generateToken.js
