@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-const generateToken = (id) => {
+export const generateToken = (id) => {
   const token = jwt.sign({ id }, "thisisasupersecretkey", {
     expiresIn: "30d",
   });
@@ -11,4 +11,3 @@ const generateToken = (id) => {
     secure: true,
   });
 };
-export default generateToken;
