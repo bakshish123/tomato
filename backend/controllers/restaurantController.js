@@ -14,3 +14,5 @@ const getRestaurant = asyncHandler(async (req, res, next) => {
 });
 
 export default getRestaurant;
+
+//more code will be added below
