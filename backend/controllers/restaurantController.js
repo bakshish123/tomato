@@ -1,10 +1,10 @@
 import asyncHandler from "express-async-handler";
-import Menu from "../models/menuModel.js";
+import Restaurant from "../models/restaurantModel.js";
 import errorHandler from "../utils/errorHandler.js";
-const getMenuItem = asyncHandler(async (req, res, next) => {
+const getRestaurant = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
-  const menuItems = await Menu.findById(id);
-  if (!menuItems) {
+  const restaurant = await Restaurant.findById(id);
+  if (!restaurant) {
     const error = new Error("Menu Item not found");
     error.status = 404;
     next(error);
@@ -13,4 +13,4 @@ const getMenuItem = asyncHandler(async (req, res, next) => {
   res.status(200).json(menuItems);
 });
 
-export default getMenuItem;
+export default getRestaurant;
