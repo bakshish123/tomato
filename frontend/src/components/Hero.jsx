@@ -20,8 +20,8 @@ const Hero = () => {
             <div className='text-white m-[2%] text-4xl text-center'>Find the best restaurants, cafés and bars in Delhi</div>
             <div className='m-5'>
               
-              <input className='h-[3rem] rounded-l-lg w-[15rem]' type="text" />
-              <input className='h-[3rem] rounded-r-lg w-[35rem]' type="text" />
+              <input className='h-[3rem] rounded-l-lg w-[15rem] border-2 border-r-slate-700' type="text" />
+              <input className='h-[3rem] rounded-r-lg w-[35rem] border-2 border-l-slate-700' type="text" />
             </div>
         </div>
         </div>  
